@@ -6,7 +6,7 @@ Files here define the visual identity of Cubelings. Treat as **immutable** unles
 
 | File | Purpose |
 |---|---|
-| `cubelings_master_reference.png` | The First Cubeling — mascot, anatomy template, palette source |
+| `cubelings_master_reference.jpg` | The First Cubeling — mascot, anatomy template, palette source |
 
 ---
 

@@ -1,0 +1,44 @@
+# Godot 4
+.godot/
+.import/
+export.cfg
+export_presets.cfg
+
+# Godot exports
+*.apk
+*.aab
+*.ipa
+*.exe
+*.pck
+*.zip
+build/
+exports/
+
+# Godot logs / generated
+*.translation
+*.import
+mono_crash.*.json
+
+# IDE / editor
+.vscode/
+.idea/
+*.iml
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# OS scratch
+*.log
+*.bak
+*.tmp
+
+# Local secrets / signing
+*.keystore
+*.jks
+*.p12
+android/keystores/
+.env
+.env.*
+!.env.example

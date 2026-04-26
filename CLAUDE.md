@@ -1,196 +1,108 @@
-# 02_GAME_DESIGN.md
+# CLAUDE.md — AI Session Bootstrap
 
-## CORE LOOP
-
-```
-WAKE → check world → quest update from NPC →
-build/decorate → care for pets → complete quest →
-unlock new items → SLEEP → repeat
-```
-
-No timer, no failure state, no rush.
+> Read this first if you are vibe-coding Cubelings with Claude. Then read `README.md`. Then read the doc you need.
 
 ---
 
-## FEATURE LIST — PHASE 1 (MVP, ~MONTH 18)
+## PROJECT IN ONE PARAGRAPH
 
-### ✅ IN PHASE 1
+Cubelings is a cozy creative voxel sandbox for Android, built by **dad + AB (age 10)** at 2 hrs/week, ~18 months to Phase 1 ship. Engine is **Godot 4.3 / GDScript**. No combat, no monsters, no strangers, no ads. Build, decorate, care for cube-creature pets, complete find-and-deliver quests. Teaching AB to code is the meta-goal.
 
-| Feature | Notes |
+---
+
+## DOCS MAP — ALWAYS START HERE
+
+| Doc | When to read it |
 |---|---|
-| 1 character creator | Hair, skin, outfit, eye gradient. Multiple save slots. |
-| 1 small open world | Forest biome, ~48³ voxel grid |
-| Day/night cycle | Smooth, ~10 min real-time per cycle |
-| 3-step house wizard | Pick room size → block type → color → 4 walls + ceiling + floor spawn |
-| Multi-room stacking | Add rooms to existing house |
-| Interior decoration | ~30 furniture items, snap-place |
-| Exterior decoration | Gardens, fences, paths, outdoor furniture (~15 items) |
-| Color/material swap | Recolor any object anytime |
-| 2 pets | Cat + dog Cubelings, follow, idle, eat |
-| Mascot companion | First Cubeling, permanent buddy from spawn |
-| Custom music | Load from device storage |
-| Save/load | Local only |
-| Touch controls | Joystick + tap |
-| 5 starter quests | NPC-given item-finding |
-| 3 NPC Cubelings | Quest givers, dialogue (text or emoji) |
-
-### ❌ NOT IN PHASE 1 (PHASE 2+)
-
-- Friends multiplayer
-- More biomes (beach, snow)
-- Farming
-- Day jobs (shop, delivery)
-- More pets (bunny, fox, etc.)
-- Custom Cubeling species
-- Builder Bench advanced mode
-- Story/narrator
-- Cloud saves
-- Play Store release
+| [`README.md`](README.md) | Repo overview, tech stack, current status |
+| [`docs/00_VISION.md`](docs/00_VISION.md) | What Cubelings is and is not |
+| [`docs/01_ART_BIBLE.md`](docs/01_ART_BIBLE.md) | Visual identity (currently a placeholder — see file) |
+| [`docs/02_GAME_DESIGN.md`](docs/02_GAME_DESIGN.md) | Phase 1 features, mechanics, scope |
+| [`docs/03_ARCHITECTURE.md`](docs/03_ARCHITECTURE.md) | Engine, scene graph, data models, perf budgets |
+| [`docs/04_ROADMAP.md`](docs/04_ROADMAP.md) | Phased plan, milestones, weekly cadence |
+| [`docs/05_AB_JOURNAL.md`](docs/05_AB_JOURNAL.md) | AB's session journal — read for tone, do not edit |
+| [`docs/06_DECISION_LOG.md`](docs/06_DECISION_LOG.md) | Every locked decision — **do not contradict** |
+| [`assets/reference/`](assets/reference/) | Canon art (mascot reference image lives here) |
+| [`assets/concept_art/`](assets/concept_art/) | AB's WIP drawings |
 
 ---
 
-## CHARACTER SYSTEM
+## HARD RULES — DO NOT VIOLATE
 
-### CHARACTER CREATOR (PHASE 1)
-- Hair: 8 styles × 6 colors (2 brand-locked: purple, black)
-- Skin: 8 tones
-- Outfit: 6 presets (each with yellow accent piece)
-- Eye gradient: 4 combinations
-- **No height/age customization in Phase 1** (aging deferred)
-- Multiple save slots (each = own character)
+These are locked in `docs/06_DECISION_LOG.md`. Treat them as immutable in any code or content you generate:
 
-### NAMING
-- Player picks name on save creation
-- Default = "AB" first slot only
+1. **No combat. No monsters. No weapons.** The Builder Bench blocks weapon-shaped voxel creations.
+2. **No strangers, no public chat, no social sharing.** Friends-only, Phase 3+, invite codes only.
+3. **Pets never die.** Ever.
+4. **No ads, no microtransactions, no loot boxes.** Optional one-time purchase is the only monetization considered (Phase 3+).
+5. **No screenshot / photo mode in Phase 1.**
+6. **No aging system.** (Removed.)
+7. **Palette is locked:** `#1A1A1F` black / `#6A1B9A` royal purple / `#FFD60A` bright yellow / `#E91E63` pink / `#9575CD` lavender / `#FFC107` sunny BG.
+8. **Mascot anatomy is canon.** All Cubelings derive from `assets/reference/cubelings_master_reference.jpg`: voxel cube body, gradient eyes, purple nose dots, yellow/purple accents.
+9. **Performance floor:** must run ≥ 30 FPS on Fire HD Max 11. If it doesn't, it doesn't ship.
+10. **Reading-optional UX.** Quests use icons + emoji; dyslexia-friendly font available.
 
----
-
-## PET SYSTEM
-
-- Cat OR dog (or both, second pet unlocked via early quest)
-- Pets follow AB by default
-- Tap pet → pet menu (feed, pet, play, dismiss/recall)
-- Mood meter: hungry, happy, sleepy
-- **Pets never die. Ever. Hard rule.**
-- Pets can sit on furniture AB places
-- Pets have idle animations in player house
+If a request would violate any of the above, stop and ask before proceeding.
 
 ---
 
-## NPC SYSTEM
+## TECH STACK SUMMARY
 
-- 3 NPC Cubelings in Phase 1:
-  1. **Mailbox NPC** — delivers quests
-  2. **Shopkeeper NPC** — trades items for materials
-  3. **Wandering NPC** — gives random tips
-- Dialogue: text bubbles + emoji (kid-readable)
-- Each NPC has fixed location and daily schedule
-- React to AB's outfit (compliments) and house style (compliments)
+| Layer | Choice |
+|---|---|
+| Engine | Godot 4.3 |
+| Language | GDScript |
+| Voxel terrain | `zylann.voxel` plugin |
+| Snapped furniture | Godot `GridMap` |
+| Art | Kenney Voxel Pack + Quaternius (no custom 3D modeling Phase 1) |
+| Save format | JSON via `FileAccess` (gzip if > 1MB) |
+| Target | Android 10+ (arm64-v8a + armeabi-v7a) |
+| CI | None in Phase 1 — manual APK export |
 
----
-
-## QUEST SYSTEM (PHASE 1)
-
-5 starter quests, all **find-and-deliver** style:
-
-1. **"Welcome Basket"** — find 3 mushrooms in forest, give to mailbox NPC
-2. **"Fashion Forward"** — find a yellow flower, deliver to shopkeeper
-3. **"Sleepy Cat"** — find/build a bed, place it for cat Cubeling
-4. **"Decorate the Door"** — place a mailbox outside your house
-5. **"Friend Request"** — invite mascot Cubeling into your house (build a room for them)
-
-Quests appear in a simple **journal UI** with checkboxes.
+Full architecture: [`docs/03_ARCHITECTURE.md`](docs/03_ARCHITECTURE.md).
 
 ---
 
-## BUILDING SYSTEM
+## REPO LAYOUT
 
-### HOUSE WIZARD (3 STEPS)
-1. **Size:** Small (3x3) / Medium (5x5) / Large (7x7)
-2. **Block type:** Wood / Stone / Brick / Crystal
-3. **Color:** Palette-locked options
-
-→ House spawns instantly with walls, floor, ceiling, door, window.
-
-### MULTI-ROOM
-- Tap existing wall → "Add Room" → wizard runs again
-- New room snaps to selected wall
-
-### INTERIOR DECORATION
-- Inventory drawer with all unlocked furniture
-- Tap item → preview ghost in world → tap floor to place
-- Long-press placed item → rotate / recolor / delete
-
-### EXTERIOR DECORATION
-- Same system, outside the house
-- Path tiles, fences, garden plots, outdoor furniture
-
-### COLOR/MATERIAL SWAP
-- Tap any object → palette wheel
-- Limited to brand palette + neutrals (wood, stone tones)
+```
+cubelings_build/
+├── README.md
+├── CLAUDE.md                       ← you are here
+├── LICENSE
+├── .gitignore
+├── docs/
+│   ├── 00_VISION.md
+│   ├── 01_ART_BIBLE.md             (placeholder — content missing)
+│   ├── 02_GAME_DESIGN.md
+│   ├── 03_ARCHITECTURE.md
+│   ├── 04_ROADMAP.md
+│   ├── 05_AB_JOURNAL.md
+│   └── 06_DECISION_LOG.md
+├── assets/
+│   ├── reference/                  ← canon art (immutable)
+│   └── concept_art/                ← AB's WIP drawings
+├── scripts/                        (future — game source)
+└── project.godot                   (future — Godot project file)
+```
 
 ---
 
-## BUILDER BENCH (CORE FEATURE)
+## WORKING STYLE WITH AB
 
-> Originally scoped as standalone tool — now baked into Cubelings.
-
-- Accessible from house (workbench prop)
-- Tiny voxel editor (8x8x8 grid)
-- AB combines voxels to create custom décor
-- Save creation → appears in inventory as placeable item
-- **No weapon shapes** — system blocks any object that detects sword/gun-like geometry (Phase 2 feature; Phase 1 just trusts AB)
+- AB is 10. Sessions are 2 hours, weekly. Dad drives the keyboard; AB navigates.
+- Default to **kid-readable code**: clear names, short functions, no premature abstractions, no clever one-liners.
+- Default to **visible progress**: every session should produce something AB can see on her phone.
+- When in doubt about scope, **cut**, don't add. The roadmap is law (`docs/04_ROADMAP.md`).
+- Decisions get logged to `docs/06_DECISION_LOG.md`. Don't reopen settled decisions without an explicit reopen entry.
 
 ---
 
-## CONTROLS (TOUCH)
+## BUILD / TEST COMMANDS
 
-- **Left thumb:** Virtual joystick (move)
-- **Right thumb:** Drag to look
-- **Tap world:** Interact / place
-- **Long press:** Object menu
-- **Top-left button:** Inventory
-- **Top-right button:** Quest journal
-- **Bottom-right button:** Camera mode (1st/3rd person toggle)
+There is no source code yet (Phase 0). Commands will be added here once Godot project is initialized in Session 1.
 
----
-
-## SAVE SYSTEM (PHASE 1)
-
-- Local storage only
-- JSON format
-- Auto-save every 60 seconds
-- Manual save on quit
-- Multiple slots (3 max in Phase 1)
-- Each slot = own character + own world
-
----
-
-## SOUND DESIGN
-
-- Ambient: birds, wind, leaves
-- UI: soft pops, chimes
-- Pet sounds: cute squeaks (not realistic meow/bark)
-- Music: chill royalty-free + custom playlist support
-- **No sharp/loud sounds anywhere**
-
----
-
-## MONETIZATION
-
-**None in Phase 1.** None planned.
-
-If Phase 3+ ships to Play Store, considered:
-- One-time purchase ($3-5)
-- Optional cosmetic DLC packs
-- **No ads. No microtransactions. No loot boxes.** Ever.
-
----
-
-## ACCESSIBILITY
-
-- Large UI buttons (kid finger friendly)
-- Optional dyslexia-friendly font
-- Color-blind safe palette (yellow + purple = high contrast)
-- Tutorial available anytime, never forced
-- No reading-required quests (icons + emoji)
+Until then:
+- Editor: open `project.godot` in Godot 4.3
+- Mobile test: export APK, sideload to Fire HD Max 11
+- No CI; no automated tests Phase 1
