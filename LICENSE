@@ -1,0 +1,153 @@
+# 01_ART_BIBLE.md
+
+## VISUAL IDENTITY — LOCKED
+
+Reference image: `assets/reference/cubelings_master_reference.png`
+
+This image is **canon.** Every art decision references it.
+
+---
+
+## CORE AESTHETIC
+
+- **Style:** Voxel / blocky / Minecraft-adjacent but softer
+- **Mood:** Cozy, slightly mysterious, cute
+- **Lighting:** Soft, warm, photo-studio feel
+- **Backgrounds:** Bold solid colors with gradient floors
+- **Vibe:** Toy commercial × indie game × cozy bedroom
+
+---
+
+## COLOR PALETTE — LAW
+
+| Role | Name | Hex |
+|---|---|---|
+| Cubeling base body | Soft Black | `#1A1A1F` |
+| Primary brand | Royal Purple | `#6A1B9A` |
+| Highlights / accents | Bright Yellow | `#FFD60A` |
+| Eye gradient mid | Pink Glow | `#E91E63` |
+| Soft accents | Lavender | `#9575CD` |
+| Title screens / UI BG | Sunny BG | `#FFC107` |
+
+**No other primary colors.** Greens, blues, reds appear only in nature elements (grass, water, fruit) — never in UI or character design.
+
+---
+
+## TYPOGRAPHY
+
+- **Wordmark:** lowercase `cubelings`, chunky rounded
+- **Font family:** Fredoka or Sniglet (both free, Google Fonts)
+- **All-lowercase brand**
+- **White on yellow** OR **yellow on black**
+
+---
+
+## CUBELING ANATOMY (UNIVERSAL TEMPLATE)
+
+Every Cubeling — pet, NPC, player — shares:
+
+| Part | Spec |
+|---|---|
+| Body | Voxel cube, slightly textured/varied (not perfectly smooth) |
+| Eyes | Oversized, glossy, gradient: yellow → pink → purple |
+| Nose | Two small purple cube dots |
+| Feet | Tiny purple cube paws |
+| Stance | Chubby, low to ground, huggable |
+| Accents | Yellow + purple highlights at extremities |
+
+**Species variation lives in:**
+- Ear shape (cat = pointy, dog = floppy, bear = round, bunny = tall)
+- Body proportions
+- Color tweaks (within palette)
+- Accessories (hats, collars, glasses)
+
+---
+
+## CHARACTER ROSTER
+
+### 🐱 CAT CUBELING
+- Triangular pointy ears (yellow tips)
+- Smaller, lithe body
+- Stacked-cube tail
+- Aloof idle, slow blink
+- Purr animation: whole body wiggle
+
+### 🐶 DOG CUBELING
+- Floppy rectangular ears
+- Slightly larger body
+- Wagging cube-stack tail
+- Excited idle, pants
+- Tongue cube pops out occasionally
+
+### 👧 AB CUBELING (PLAYER AVATAR)
+- Same body template
+- Hair (voxel) replaces ears: purple/black shades
+- Outfit cubes with one yellow accent piece
+- Customizable eye gradient
+- Fashion-first design
+- **AB is a Cubeling. So is everyone.**
+
+### 🧑‍🌾 NPC CUBELINGS
+- Same template, different hats/accessories
+- Each has unique ear style + accent color
+- Names player invents OR fixed defaults
+
+### ✨ MASCOT CUBELING (FIRST CUBELING)
+- The exact creature in `cubelings_master_reference.png`
+- Bear/cat ambiguous ears (yellow + purple tips)
+- Travels with AB at world start
+- Communicates via emoji bubbles
+- Names itself based on what AB types
+- **Permanent companion**
+
+---
+
+## ENVIRONMENT STYLE
+
+- **Terrain:** Voxel blocks, slightly rounded edges allowed via shader
+- **Sky:** Solid color gradient (purple→yellow at sunrise/sunset)
+- **Water:** Animated UV-scrolling texture (no real fluid sim)
+- **Grass/leaves:** Tiny vertex sway shader (fake wind)
+- **Shadows:** Baked, not real-time
+- **Fog:** Used to hide draw-distance limit (purple-tinted)
+
+---
+
+## UI STYLE
+
+- **Buttons:** Rounded squares, yellow on purple OR purple on yellow
+- **Icons:** Voxel-style mini cubes
+- **Text:** Lowercase, chunky, Fredoka
+- **Animations:** Bounce on tap, no harsh transitions
+- **Sounds:** Soft pops, chimes, no sharp clicks
+
+---
+
+## ART RULES
+
+1. **Every visible thing is built from cubes** — no curves, no spheres (eyes excepted)
+2. **Palette discipline** — if it's not in the palette, it's wrong
+3. **Yellow accents everywhere** — every character/object has at least one yellow detail
+4. **Soft over sharp** — slight rounding, ambient occlusion, never harsh
+5. **Toy-set lighting** — feels like a photographed diorama
+6. **No realism** — if a player thinks "this looks real," we failed
+
+---
+
+## ASSET SOURCES (PHASE 1)
+
+- **Kenney Voxel Pack** (kenney.nl) — primary furniture & character source
+- **Quaternius Ultimate Modular** — secondary furniture
+- **Poly Pizza** — gap-filling
+- **Custom palette swap** — recolor any asset to fit black/purple/yellow
+
+**No custom 3D modeling in Phase 1.** Recolor and combine free assets only.
+
+---
+
+## FUTURE ART DIRECTION (POST-PHASE-1)
+
+- Custom Cubeling-specific furniture (with tiny faces optional)
+- Animated micro-expressions on Cubelings
+- Seasonal palette events (still within brand)
+- AB-designed assets (when she's ready)
