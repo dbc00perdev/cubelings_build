@@ -1,9 +1,20 @@
-[gd_scene load_steps=4 format=3 uid="uid://cubelingsmainscene"]
+[gd_scene load_steps=9 format=3 uid="uid://cubelingsmainscene"]
+
+[ext_resource type="Script" path="res://scripts/cubeling_spin.gd" id="1_spin"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_purple"]
 albedo_color = Color(0.4156, 0.10588, 0.6039, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yellow"]
+albedo_color = Color(1, 0.83922, 0.03922, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_cube"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_eye"]
+size = Vector3(0.18, 0.18, 0.05)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nose"]
+size = Vector3(0.08, 0.08, 0.05)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ground"]
 size = Vector2(20, 20)
@@ -22,7 +33,25 @@ current = true
 [node name="Ground" type="MeshInstance3D" parent="."]
 mesh = SubResource("PlaneMesh_ground")
 
-[node name="PurpleCube" type="MeshInstance3D" parent="."]
+[node name="Cubeling" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1_spin")
+
+[node name="Body" type="MeshInstance3D" parent="Cubeling"]
 mesh = SubResource("BoxMesh_cube")
+material_override = SubResource("StandardMaterial3D_purple")
+
+[node name="LeftEye" type="MeshInstance3D" parent="Cubeling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22, 0.18, 0.525)
+mesh = SubResource("BoxMesh_eye")
+material_override = SubResource("StandardMaterial3D_yellow")
+
+[node name="RightEye" type="MeshInstance3D" parent="Cubeling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.22, 0.18, 0.525)
+mesh = SubResource("BoxMesh_eye")
+material_override = SubResource("StandardMaterial3D_yellow")
+
+[node name="Nose" type="MeshInstance3D" parent="Cubeling"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0.525)
+mesh = SubResource("BoxMesh_nose")
 material_override = SubResource("StandardMaterial3D_purple")
