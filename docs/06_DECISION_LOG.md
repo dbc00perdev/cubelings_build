@@ -31,7 +31,7 @@
 - **Reason:** AB picked black/purple/yellow as core; gradient eye colors derived from mascot reference
 
 ### 🟢 MASCOT / FIRST CUBELING
-- **Decision:** Reference image `assets/reference/cubelings_master_reference.png` is canon. Every Cubeling shares anatomy: voxel cube body, gradient eyes, purple nose dots, yellow/purple accents.
+- **Decision:** Reference image `assets/reference/cubelings_master_reference.jpg` is canon. Every Cubeling shares anatomy: voxel cube body, gradient eyes, purple nose dots, yellow/purple accents.
 - **Reason:** Single image defines entire visual identity
 
 ### 🟢 TARGET PLATFORM
